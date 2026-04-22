@@ -1,0 +1,24 @@
+{
+  "name": "changdaye-blog-worker-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "typecheck": "astro check",
+    "check": "npm run typecheck && npm run test",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.6.0",
+    "astro": "^5.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4",
+    "wrangler": "^4.13.2"
+  }
+}

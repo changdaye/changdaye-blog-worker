@@ -1,0 +1,7 @@
+{
+  "name": "changdaye-blog-worker",
+  "private": true,
+  "scripts": {
+    "check": "cd app && npm run check"
+  }
+}
