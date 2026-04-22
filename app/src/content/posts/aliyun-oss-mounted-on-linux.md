@@ -9,6 +9,7 @@ tags:
   - OSS
   - Linux
   - 对象存储
+cover: '/images/site/covers/oss.svg'
 featured: true
 draft: false
 ---

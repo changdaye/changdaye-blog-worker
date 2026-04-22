@@ -8,6 +8,7 @@ tags:
   - MQ
   - Kafka
   - 幂等性
+cover: '/images/site/covers/mq.svg'
 featured: true
 draft: false
 ---

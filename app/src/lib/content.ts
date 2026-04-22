@@ -16,3 +16,12 @@ export function uniqueTags<T extends { data: { tags: string[] } }>(posts: T[]): 
 
   return tags;
 }
+
+export function getAdjacentPosts<T extends { slug: string }>(posts: T[], slug: string): { previous?: T; next?: T } {
+  const index = posts.findIndex((post) => post.slug === slug);
+  if (index === -1) return {};
+  return {
+    previous: index > 0 ? posts[index - 1] : undefined,
+    next: index < posts.length - 1 ? posts[index + 1] : undefined
+  };
+}

@@ -6,6 +6,7 @@ date: 2026-04-22
 tags:
   - Astro
   - Rewrite
+cover: '/images/site/covers/oss.svg'
 featured: true
 author: "Mr Chang"
 ---

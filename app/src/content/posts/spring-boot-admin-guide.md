@@ -8,6 +8,7 @@ tags:
   - Spring Boot
   - Monitoring
   - Java
+cover: '/images/site/covers/admin.svg'
 featured: false
 draft: false
 ---

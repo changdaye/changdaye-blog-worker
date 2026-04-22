@@ -24,7 +24,7 @@ const latestPosts = posts.slice(0, 6);
       </div>
       <div class="grid two">
         {featuredPosts.map((post) => (
-          <PostCard title={post.data.title} description={post.data.description} href={postPath(post.slug)} meta={post.data.date.toISOString().slice(0, 10)} />
+          <PostCard title={post.data.title} description={post.data.description} href={postPath(post.slug)} meta={post.data.date.toISOString().slice(0, 10)} cover={post.data.cover} />
         ))}
       </div>
     </section>
@@ -36,7 +36,7 @@ const latestPosts = posts.slice(0, 6);
       </div>
       <div class="grid">
         {latestPosts.map((post) => (
-          <PostCard title={post.data.title} description={post.data.description} href={postPath(post.slug)} meta={post.data.date.toISOString().slice(0, 10)} />
+          <PostCard title={post.data.title} description={post.data.description} href={postPath(post.slug)} meta={post.data.date.toISOString().slice(0, 10)} cover={post.data.cover} />
         ))}
       </div>
     </section>

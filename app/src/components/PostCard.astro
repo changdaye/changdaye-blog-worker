@@ -1,8 +1,11 @@
 ---
-const { title, description, href = '#', meta = '' } = Astro.props;
+const { title, description, href = '#', meta = '', cover } = Astro.props;
 ---
-<article class="card" style="padding: 24px; display: grid; gap: 10px;">
-  <div class="muted" style="font-size: 13px;">{meta}</div>
-  <h2 style="margin: 0; font-size: 24px;"><a href={href}>{title}</a></h2>
-  <p class="muted" style="margin: 0; line-height: 1.7;">{description}</p>
+<article class="card" style="overflow: hidden; display: grid; gap: 0;">
+  {cover && <img src={cover} alt={title} style="aspect-ratio: 16 / 9; object-fit: cover; width: 100%;" />}
+  <div style="padding: 24px; display: grid; gap: 10px;">
+    <div class="muted" style="font-size: 13px;">{meta}</div>
+    <h2 style="margin: 0; font-size: 24px;"><a href={href}>{title}</a></h2>
+    <p class="muted" style="margin: 0; line-height: 1.7;">{description}</p>
+  </div>
 </article>

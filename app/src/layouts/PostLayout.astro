@@ -3,18 +3,40 @@ import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import TagList from '../components/TagList.astro';
-const { title, subtitle = '', description = '', tags = [] } = Astro.props;
+const { title, subtitle = '', description = '', tags = [], cover, previous, next } = Astro.props;
 ---
 <BaseLayout title={title} description={description}>
   <Header />
   <main>
-    <article class="section card" style="padding: 32px;">
-      <p class="muted">Article</p>
-      <h1>{title}</h1>
-      {subtitle && <p class="muted">{subtitle}</p>}
-      <TagList tags={tags} />
-      <slot />
+    <article class="section card" style="overflow: hidden;">
+      {cover && <img src={cover} alt={title} style="width: 100%; aspect-ratio: 16 / 7; object-fit: cover;" />}
+      <div style="padding: 32px;">
+        <p class="muted">Article</p>
+        <h1>{title}</h1>
+        {subtitle && <p class="muted">{subtitle}</p>}
+        <TagList tags={tags} />
+        <div style="margin-top: 24px;">
+          <slot />
+        </div>
+      </div>
     </article>
+
+    {(previous || next) && (
+      <nav class="section grid two">
+        {previous ? (
+          <a class="card" href={`/posts/${previous.slug}/`} style="padding: 24px; display: grid; gap: 8px;">
+            <span class="muted">上一篇</span>
+            <strong>{previous.data.title}</strong>
+          </a>
+        ) : <div />}
+        {next ? (
+          <a class="card" href={`/posts/${next.slug}/`} style="padding: 24px; display: grid; gap: 8px; text-align: right;">
+            <span class="muted">下一篇</span>
+            <strong>{next.data.title}</strong>
+          </a>
+        ) : <div />}
+      </nav>
+    )}
   </main>
   <Footer />
 </BaseLayout>
