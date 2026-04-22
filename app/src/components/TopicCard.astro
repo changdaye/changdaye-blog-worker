@@ -1,0 +1,9 @@
+---
+const { tag, count, href, summary } = Astro.props;
+---
+<a class="card" href={href} style="padding: 20px; display: grid; gap: 12px; min-height: 150px;">
+  <span class="eyebrow">专题</span>
+  <h3 style="margin: 0; font-size: 22px;">{tag}</h3>
+  <p class="muted" style="margin: 0; line-height: 1.7;">{summary}</p>
+  <div class="tag" style="width: fit-content;">{count} 篇文章</div>
+</a>

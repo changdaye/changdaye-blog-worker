@@ -3,40 +3,52 @@ import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import TagList from '../components/TagList.astro';
-const { title, subtitle = '', description = '', tags = [], cover, previous, next } = Astro.props;
+import TableOfContents from '../components/TableOfContents.astro';
+import ArticleMetaRail from '../components/ArticleMetaRail.astro';
+const { title, subtitle = '', description = '', tags = [], cover, previous, next, headings = [], post, readingMinutes = 1, topic = '未分类' } = Astro.props;
 ---
 <BaseLayout title={title} description={description}>
   <Header />
   <main>
-    <article class="section card" style="overflow: hidden;">
-      {cover && <img src={cover} alt={title} style="width: 100%; aspect-ratio: 16 / 7; object-fit: cover;" />}
-      <div style="padding: 32px;">
-        <p class="muted">Article</p>
-        <h1>{title}</h1>
-        {subtitle && <p class="muted">{subtitle}</p>}
-        <TagList tags={tags} />
-        <div style="margin-top: 24px;">
-          <slot />
-        </div>
-      </div>
-    </article>
+    <div class="kb-article-grid section">
+      <TableOfContents headings={headings} />
 
-    {(previous || next) && (
-      <nav class="section grid two">
-        {previous ? (
-          <a class="card" href={`/posts/${previous.slug}/`} style="padding: 24px; display: grid; gap: 8px;">
-            <span class="muted">上一篇</span>
-            <strong>{previous.data.title}</strong>
-          </a>
-        ) : <div />}
-        {next ? (
-          <a class="card" href={`/posts/${next.slug}/`} style="padding: 24px; display: grid; gap: 8px; text-align: right;">
-            <span class="muted">下一篇</span>
-            <strong>{next.data.title}</strong>
-          </a>
-        ) : <div />}
-      </nav>
-    )}
+      <div>
+        <article class="card" style="overflow: hidden;">
+          {cover && <img src={cover} alt={title} style="width: 100%; aspect-ratio: 16 / 7; object-fit: cover;" />}
+          <div style="padding: 34px;">
+            <span class="eyebrow">专栏文章</span>
+            <h1 style="margin: 12px 0 10px; font-size: clamp(30px, 4vw, 48px); line-height: 1.15;">{title}</h1>
+            {subtitle && <p class="muted" style="font-size: 18px; margin: 0 0 18px;">{subtitle}</p>}
+            <TagList tags={tags} />
+            <div style="margin-top: 26px;">
+              <slot />
+            </div>
+          </div>
+        </article>
+
+        {(previous || next) && (
+          <nav class="section kb-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+            {previous ? (
+              <a class="card" href={`/posts/${previous.slug}/`} style="padding: 22px; display: grid; gap: 8px;">
+                <span class="eyebrow">上一篇</span>
+                <strong style="font-size: 18px;">{previous.data.title}</strong>
+                <span class="muted">继续阅读相邻文章</span>
+              </a>
+            ) : <div />}
+            {next ? (
+              <a class="card" href={`/posts/${next.slug}/`} style="padding: 22px; display: grid; gap: 8px; text-align: right;">
+                <span class="eyebrow" style="justify-content: flex-end;">下一篇</span>
+                <strong style="font-size: 18px;">{next.data.title}</strong>
+                <span class="muted">跳到后一篇文章</span>
+              </a>
+            ) : <div />}
+          </nav>
+        )}
+      </div>
+
+      <ArticleMetaRail post={post} readingMinutes={readingMinutes} topic={topic} />
+    </div>
   </main>
   <Footer />
 </BaseLayout>

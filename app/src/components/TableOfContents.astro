@@ -1,0 +1,17 @@
+---
+const { headings = [] } = Astro.props;
+---
+<div class="kb-sidebar card">
+  <h3>文章目录</h3>
+  {headings.length > 0 ? (
+    <nav class="toc-list">
+      {headings
+        .filter((heading: any) => heading.depth >= 2 && heading.depth <= 4)
+        .map((heading: any) => (
+          <a class={`level-${heading.depth}`} href={`#${heading.slug}`}>{heading.text}</a>
+        ))}
+    </nav>
+  ) : (
+    <p class="muted" style="margin: 0; font-size: 14px;">这篇文章没有生成可用目录。</p>
+  )}
+</div>

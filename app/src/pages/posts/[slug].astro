@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
 import Prose from '../../components/Prose.astro';
-import { getAdjacentPosts, sortPostsByDate } from '../../lib/content';
+import { estimateReadingMinutes, getAdjacentPosts, getPrimaryTopic, sortPostsByDate } from '../../lib/content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -10,9 +10,12 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const rendered = await post.render();
+const { Content, headings } = rendered;
 const allPosts = sortPostsByDate((await getCollection('posts')).filter((entry) => !entry.data.draft));
 const { previous, next } = getAdjacentPosts(allPosts, post.slug);
+const readingMinutes = estimateReadingMinutes(post.body);
+const topic = getPrimaryTopic(post);
 ---
 <PostLayout
   title={post.data.title}
@@ -22,6 +25,10 @@ const { previous, next } = getAdjacentPosts(allPosts, post.slug);
   cover={post.data.cover}
   previous={previous}
   next={next}
+  headings={headings}
+  post={post}
+  readingMinutes={readingMinutes}
+  topic={topic}
 >
   <Prose>
     <Content />
