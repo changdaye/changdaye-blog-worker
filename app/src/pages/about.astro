@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { about } from '../data/about';
+---
+<BaseLayout title="About" description={about.intro}>
+  <Header />
+  <main>
+    <section class="section card" style="padding: 32px; display: grid; gap: 16px;">
+      <p class="tag" style="width: fit-content;">About</p>
+      <h1 style="margin: 0;">{about.headline}</h1>
+      <p class="muted" style="margin: 0; line-height: 1.8;">{about.intro}</p>
+      <ul style="margin: 0; padding-left: 20px; line-height: 1.9; color: var(--muted);">
+        {about.details.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

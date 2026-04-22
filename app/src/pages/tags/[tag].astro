@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+import { sortPostsByDate, uniqueTags } from '../../lib/content';
+import { slugifySegment, postPath } from '../../lib/routes';
+
+export async function getStaticPaths() {
+  const posts = sortPostsByDate((await getCollection('posts')).filter((post) => !post.data.draft));
+  const tags = uniqueTags(posts);
+  return tags.map((tag) => ({ params: { tag: slugifySegment(tag) }, props: { tag } }));
+}
+
+const { tag } = Astro.props;
+const posts = sortPostsByDate((await getCollection('posts')).filter((post) => !post.data.draft)).filter((post) =>
+  post.data.tags.some((item) => slugifySegment(item) === tag)
+);
+---
+<BaseLayout title={`标签：${tag}`} description={`标签 ${tag} 下的文章`}>
+  <Header />
+  <main>
+    <section class="section grid">
+      <h1 style="margin: 0;">标签：{tag}</h1>
+      {posts.map((post) => (
+        <PostCard title={post.data.title} description={post.data.description} href={postPath(post.slug)} meta={post.data.date.toISOString().slice(0, 10)} />
+      ))}
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

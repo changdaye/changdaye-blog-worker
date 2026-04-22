@@ -4,22 +4,41 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+import { sortPostsByDate } from '../lib/content';
+import { postPath } from '../lib/routes';
+
+const posts = sortPostsByDate(await getCollection('posts')).filter((post) => !post.data.draft);
+const featuredPosts = posts.filter((post) => post.data.featured);
+const latestPosts = posts.slice(0, 6);
 ---
 <BaseLayout>
   <Header />
   <main>
     <Hero />
-    <section class="section grid two">
-      <PostCard
-        title="Fresh architecture first"
-        description="先把新的页面、组件、样式和内容模型做好，再逐步选择内容进入新站。"
-        meta="Architecture"
-      />
-      <PostCard
-        title="Selective legacy content"
-        description="旧文章不会一股脑迁入，新站只收录真正要保留和继续经营的内容。"
-        meta="Content Strategy"
-      />
+
+    <section class="section grid">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+        <h2 style="margin: 0;">精选文章</h2>
+        <span class="muted">Featured</span>
+      </div>
+      <div class="grid two">
+        {featuredPosts.map((post) => (
+          <PostCard title={post.data.title} description={post.data.description} href={postPath(post.slug)} meta={post.data.date.toISOString().slice(0, 10)} />
+        ))}
+      </div>
+    </section>
+
+    <section class="section grid">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+        <h2 style="margin: 0;">最新文章</h2>
+        <span class="muted">Latest</span>
+      </div>
+      <div class="grid">
+        {latestPosts.map((post) => (
+          <PostCard title={post.data.title} description={post.data.description} href={postPath(post.slug)} meta={post.data.date.toISOString().slice(0, 10)} />
+        ))}
+      </div>
     </section>
   </main>
   <Footer />
