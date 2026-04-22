@@ -1,17 +1,32 @@
 # changdaye-blog-worker
 
-Modern static blog rebuilt from `changdaye.github.io` for Cloudflare Workers.
+Rewrite-first Astro blog rebuilt from the old `changdaye.github.io` content library for Cloudflare Workers.
 
-## Status
+## Current scope
 
-Planning in progress. See:
+- Build a brand-new Astro blog architecture in this repository
+- Curate legacy articles in small batches instead of bulk migration
+- Localize only the images required by selected content
+- Serve the final static build through Cloudflare Workers assets
 
-- `docs/superpowers/specs/2026-04-22-cf-workers-blog-migration-design.md`
-
-## Development bootstrap
+## Development
 
 ```bash
 cd app
 npm install
-npm test -- --run tests/routes.test.ts
+npm run check
+npm run build
 ```
+
+## Deploy to Cloudflare Workers
+
+```bash
+cd app
+npm install
+npm run build
+npm run deploy
+```
+
+## Legacy source policy
+
+The old `changdaye.github.io` repository is reference material only. New pages, styles, components, and content structure are defined in this repository first; legacy content is then selectively rewritten into the new model.

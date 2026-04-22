@@ -2,3 +2,4 @@
 node_modules/
 app/.astro/
 app/dist/
+app/.wrangler/
