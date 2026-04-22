@@ -13,7 +13,7 @@ draft: false
 ---
 # 如何保证消息不被重复消费？（如何保证消息消费的幂等性）
 
-![](https://cdn-blog.oss-cn-beijing.aliyuncs.com/20191119154303-uO7WdX.png)
+![](/images/posts/cdn-blog.oss-cn-beijing.aliyuncs.com/20191119154303-uO7WdX.png)
 
 举个例子吧。假设你有个系统，消费一条消息就往数据库里插入一条数据，要是你一个消息重复两次，你不就插入了两条，这数据不就错了？但是你要是消费到第二次的时候，自己判断一下是否已经消费过了，若是就直接扔了，这样不就保留了一条数据，从而保证了数据的正确性。
 
@@ -49,6 +49,6 @@ Kafka 实际上有个 offset 的概念，就是每个消息写进去，都有一
 也就不知道你已经消费了 offset=153 这条数据。那么重启之后，消费者会找 kafka 说，嘿，哥儿们，你给我接着把上次我消费到的那个地方后面的数据继续给我传递过来。由于之前的 offset 没有提交成功，那么数据 1/2
 会再次传过来，如果此时消费者没有去重的话，那么就会导致重复消费。
 
-![](https://cdn-blog.oss-cn-beijing.aliyuncs.com/20191119154641-yetZKA.png)
+![](/images/posts/cdn-blog.oss-cn-beijing.aliyuncs.com/20191119154641-yetZKA.png)
 
 如果消费者干的事儿是拿一条数据就往数据库里写一条，会导致说，你可能就把数据 1/2 在数据库里插入了 2 次，那么数据就错啦。

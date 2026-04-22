@@ -57,7 +57,7 @@ ossfs提供的功能和性能和本地文件系统相比，具有一些局限性
 * 不适合用在高并发读/写的场景，这样会让系统的load升高。
 
 
-![](https://cdn-blog.oss-cn-beijing.aliyuncs.com/17-10-16/14712275.jpg)
+![](/images/posts/cdn-blog.oss-cn-beijing.aliyuncs.com/17-10-16/14712275.jpg)
 
 ## 安装及使用
 
@@ -66,13 +66,13 @@ ossfs提供的功能和性能和本地文件系统相比，具有一些局限性
 
 ## 效果图
 1. 挂载完成图（这边可以看到200多TB的存储）
-   ![](https://cdn-blog.oss-cn-beijing.aliyuncs.com/17-10-12/26787845.jpg)
+   ![](/images/posts/cdn-blog.oss-cn-beijing.aliyuncs.com/17-10-12/26787845.jpg)
 	
 2. 在相应目录创建文件夹与文件
-   ![](https://cdn-blog.oss-cn-beijing.aliyuncs.com/17-10-12/32927799.jpg)
+   ![](/images/posts/cdn-blog.oss-cn-beijing.aliyuncs.com/17-10-12/32927799.jpg)
 	
 3. 在阿里云控制台查看文件
-   ![](https://cdn-blog.oss-cn-beijing.aliyuncs.com/17-10-12/14403343.jpg)
+   ![](/images/posts/cdn-blog.oss-cn-beijing.aliyuncs.com/17-10-12/14403343.jpg)
 
 
 
