@@ -17,3 +17,6 @@ cd app
 npm install
 npm run check
 ```
+
+The migration scripts expect the legacy repo to exist at `../changdaye.github.io` by default.
+Override with `LEGACY_BLOG_DIR=/absolute/path/to/changdaye.github.io npm run import:source`.
