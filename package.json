@@ -1,0 +1,12 @@
+{
+  "name": "changdaye-blog-worker",
+  "private": true,
+  "scripts": {
+    "import:source": "node scripts/import-legacy-source.mjs",
+    "download:images": "node scripts/download-images.mjs",
+    "migrate:posts": "node scripts/migrate-posts.mjs",
+    "extract:about": "node scripts/extract-about.mjs",
+    "prepare:content": "npm run import:source && npm run download:images && npm run migrate:posts && npm run extract:about",
+    "check": "cd app && npm run check"
+  }
+}

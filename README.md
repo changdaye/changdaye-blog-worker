@@ -7,3 +7,13 @@ Modern static blog rebuilt from `changdaye.github.io` for Cloudflare Workers.
 Planning in progress. See:
 
 - `docs/superpowers/specs/2026-04-22-cf-workers-blog-migration-design.md`
+- `docs/superpowers/plans/2026-04-22-cf-workers-blog-migration.md`
+
+## Development bootstrap
+
+```bash
+npm run prepare:content
+cd app
+npm install
+npm run check
+```
