@@ -1,0 +1,20 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TagList from '../components/TagList.astro';
+const { title, subtitle = '', description = '', tags = [] } = Astro.props;
+---
+<BaseLayout title={title} description={description}>
+  <Header />
+  <main>
+    <article class="section card" style="padding: 32px;">
+      <p class="muted">Article</p>
+      <h1>{title}</h1>
+      {subtitle && <p class="muted">{subtitle}</p>}
+      <TagList tags={tags} />
+      <slot />
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
