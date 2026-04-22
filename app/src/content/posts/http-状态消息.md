@@ -1,0 +1,33 @@
+---
+title: "HTTP 状态消息"
+subtitle: "\\\"HTTP 状态消息 \\\""
+description: "HTTP 状态消息"
+date: 2018-01-10
+author: "Mr Chang"
+tags:
+  - HTTP CODE
+cover: "/images/site/post-bg-e2e-ux.jpg"
+featured: false
+draft: false
+---# HTTP 状态消息
+
+### 1xx: 信息
+
+![](/images/posts/cdn-blog.oss-cn-beijing.aliyuncs.com/18-1-10/45971570.jpg)
+
+### 2xx: 成功
+
+![](/images/posts/cdn-blog.oss-cn-beijing.aliyuncs.com/18-1-10/59332364.jpg)
+
+
+### 3xx: 重定向
+
+![](/images/posts/cdn-blog.oss-cn-beijing.aliyuncs.com/18-1-10/19235584.jpg)
+
+### 4xx: 客户端错误
+
+![](/images/posts/cdn-blog.oss-cn-beijing.aliyuncs.com/18-1-10/97892624.jpg)
+
+### 5xx: 服务器错误
+
+![](/images/posts/cdn-blog.oss-cn-beijing.aliyuncs.com/18-1-10/95890300.jpg)
