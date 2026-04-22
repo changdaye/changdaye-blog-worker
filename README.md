@@ -1,15 +1,24 @@
 # changdaye-blog-worker
 
-Rewrite-first Astro blog rebuilt from the old `changdaye.github.io` content library for Cloudflare Workers.
+一个基于 **Astro + Cloudflare Workers** 的中文技术博客重构项目。
 
-## Current scope
+当前仓库已经将旧博客 `changdaye.github.io` 的历史文章迁入新的站点结构，并使用新的知识库 / 专栏风页面继续承载内容。
 
-- Build a brand-new Astro blog architecture in this repository
-- Curate legacy articles in small batches instead of bulk migration
-- Localize only the images required by selected content
-- Serve the final static build through Cloudflare Workers assets
+> English backup: see [README.en.md](./README.en.md)
 
-## Development
+## 当前状态
+
+目前项目已经完成：
+
+- 基于 Astro 的全新静态博客结构
+- Cloudflare Workers 静态资源部署
+- 全量旧文章迁入新站内容模型
+- 文章配图尽量本地化为静态资源
+- 首页专题入口 + 最新文章流
+- 文章页左侧目录 / 中间正文 / 右侧信息栏
+- 标签页、About、RSS、404 页面
+
+## 本地开发
 
 ```bash
 cd app
@@ -18,7 +27,7 @@ npm run check
 npm run build
 ```
 
-## Deploy to Cloudflare Workers
+## 部署到 Cloudflare Workers
 
 ```bash
 cd app
@@ -27,6 +36,13 @@ npm run build
 npm run deploy
 ```
 
-## Legacy source policy
+## 仓库说明
 
-The old `changdaye.github.io` repository is reference material only. New pages, styles, components, and content structure are defined in this repository first; legacy content is then selectively rewritten into the new model.
+- `app/`：新的 Astro 博客工程
+- `app/src/content/posts/`：博客文章内容
+- `app/public/images/`：本地静态图片资源
+- `docs/`：设计与实现计划文档
+
+## 备注
+
+旧仓库 `changdaye.github.io` 现在主要作为历史内容参考来源；新的页面结构、样式、组件和部署方式都以当前仓库为准。
