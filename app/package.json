@@ -9,7 +9,8 @@
     "test": "vitest run",
     "typecheck": "astro check",
     "check": "npm run typecheck && npm run test",
-    "deploy": "wrangler deploy"
+    "deploy": "npm run check:cloudflare-account && wrangler deploy",
+    "check:cloudflare-account": "node scripts/check-cloudflare-account.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.11",

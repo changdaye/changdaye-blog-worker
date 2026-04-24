@@ -2,6 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "changdaye-blog-worker",
   "compatibility_date": "2026-04-22",
+  "account_id": "6ef22eafdfaea04ccc59c7a4d85a087c",
   "assets": {
     "directory": "./dist"
   },
