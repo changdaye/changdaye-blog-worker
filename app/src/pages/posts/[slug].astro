@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+import Prose from '../../components/Prose.astro';
+import { estimateReadingMinutes, getAdjacentPosts, getPrimaryTopic, sortPostsByDate } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.filter((post) => !post.data.draft).map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const rendered = await post.render();
+const { Content, headings } = rendered;
+const allPosts = sortPostsByDate((await getCollection('posts')).filter((entry) => !entry.data.draft));
+const { previous, next } = getAdjacentPosts(allPosts, post.slug);
+const readingMinutes = estimateReadingMinutes(post.body);
+const topic = getPrimaryTopic(post);
+---
+<PostLayout
+  title={post.data.title}
+  subtitle={post.data.subtitle}
+  description={post.data.description}
+  tags={post.data.tags}
+  cover={post.data.cover}
+  previous={previous}
+  next={next}
+  headings={headings}
+  post={post}
+  readingMinutes={readingMinutes}
+  topic={topic}
+>
+  <Prose>
+    <Content />
+  </Prose>
+</PostLayout>

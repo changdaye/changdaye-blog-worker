@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import { uniqueTags } from '../../lib/content';
+import { tagPath } from '../../lib/routes';
+
+const tags = uniqueTags((await getCollection('posts')).filter((post) => !post.data.draft));
+---
+<BaseLayout title="标签" description="全部标签">
+  <Header />
+  <main>
+    <section class="section card" style="padding: 32px; display: grid; gap: 20px;">
+      <h1 style="margin: 0;">全部标签</h1>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        {tags.map((tag) => <a class="tag" href={tagPath(tag)}>{tag}</a>)}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

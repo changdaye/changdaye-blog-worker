@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <rect width="1600" height="900" fill="#0B1020"/>
+  <circle cx="1220" cy="180" r="220" fill="#1F4FFF" fill-opacity="0.28"/>
+  <circle cx="360" cy="760" r="260" fill="#5AB4FF" fill-opacity="0.18"/>
+  <rect x="220" y="180" width="1160" height="540" rx="32" fill="#121A31" stroke="#2E406E" stroke-width="2"/>
+  <text x="300" y="390" fill="#E8EEFC" font-size="88" font-family="Arial, sans-serif" font-weight="700">OSS on Linux</text>
+  <text x="300" y="490" fill="#A9B4D0" font-size="34" font-family="Arial, sans-serif">对象存储、本地挂载与边界实践</text>
+</svg>

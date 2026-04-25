@@ -1,0 +1,29 @@
+---
+const { post, readingMinutes, topic } = Astro.props;
+---
+<aside class="kb-sidebar right-rail card">
+  <h3>文章信息</h3>
+  <div class="meta-list">
+    <div class="meta-item">
+      <span class="meta-label">发布时间</span>
+      <span>{post.data.date.toISOString().slice(0, 10)}</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">阅读时长</span>
+      <span>约 {readingMinutes} 分钟</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">专题归属</span>
+      <span>{topic}</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">标签</span>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        {post.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 18px; display:grid; gap: 12px;">
+    <a class="back-top" href="#top">返回顶部</a>
+  </div>
+</aside>

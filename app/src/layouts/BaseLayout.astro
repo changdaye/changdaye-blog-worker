@@ -1,0 +1,18 @@
+---
+import '../styles/global.css';
+const {
+  title = 'MrChang Blog',
+  description = 'Rewrite-first technical blog built with Astro and Cloudflare Workers.'
+} = Astro.props;
+---
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body id="top">
+    <slot />
+  </body>
+</html>

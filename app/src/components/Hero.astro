@@ -1,0 +1,13 @@
+---
+const { totalPosts = 0, totalTopics = 0 } = Astro.props;
+---
+<section class="section card hero-shell">
+  <span class="eyebrow">Knowledge Base</span>
+  <h1 style="margin: 14px 0 10px; font-size: clamp(34px, 5vw, 62px); line-height: 1.05; max-width: 12ch;">中文知识库 / 专栏风 的 Astro 博客重构版</h1>
+  <p class="muted" style="max-width: 760px; margin: 0; font-size: 18px;">新的首页优先提供专题入口，文章页优先服务长文阅读。现在已经把旧博客文章全部纳入新站内容模型，并开始按知识库方式重组阅读体验。</p>
+  <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px;">
+    <span class="tag">{totalPosts} 篇文章</span>
+    <span class="tag">{totalTopics} 个主题</span>
+    <a class="tag" href="/tags/">进入专题索引</a>
+  </div>
+</section>

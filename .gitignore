@@ -2,3 +2,8 @@
 node_modules/
 imported/*
 !imported/.gitkeep
+app/.astro/
+app/dist/
+app/.wrangler/
+.omx/
+app/.dev.vars

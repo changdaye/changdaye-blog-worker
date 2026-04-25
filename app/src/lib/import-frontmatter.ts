@@ -1,48 +1,59 @@
-export function splitFrontmatter(markdown: string): { frontmatter: string; body: string } {
-  const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-  if (!match) {
-    throw new Error('Missing frontmatter block');
-  }
-  return { frontmatter: match[1], body: match[2] };
+export type LegacyPost = {
+  slug: string;
+  title: string;
+  subtitle: string;
+  date: string;
+  author: string;
+  headerImage: string;
+  tags: string[];
+  body: string;
+};
+
+function trimWrappedQuotes(value: string): string {
+  return value.trim().replace(/^"|"$/g, '').replace(/^'|'$/g, '');
 }
 
-export function parseSimpleFrontmatter(frontmatter: string) {
-  const result: {
-    title: string;
-    subtitle: string;
-    date: string;
-    author: string;
-    headerImage: string;
-    catalog: boolean;
-    tags: string[];
-  } = {
+export function parseLegacyPost(markdown: string, filename: string): LegacyPost {
+  const match = markdown.match(/^\s*---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if (!match) {
+    throw new Error(`Missing frontmatter block in ${filename}`);
+  }
+
+  const frontmatter = match[1];
+  const body = match[2].trim();
+  const result: LegacyPost = {
+    slug: filename.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, ''),
     title: '',
     subtitle: '',
     date: '',
     author: '',
     headerImage: '',
-    catalog: false,
-    tags: []
+    tags: [],
+    body,
   };
 
   let inTags = false;
   for (const rawLine of frontmatter.split('\n')) {
     const line = rawLine.trimEnd();
-    if (line.startsWith('tags:')) {
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith('tags:')) {
       inTags = true;
       continue;
     }
-    if (inTags && line.trim().startsWith('- ')) {
-      result.tags.push(line.trim().slice(2));
+
+    if (inTags && trimmed.startsWith('- ')) {
+      result.tags.push(trimWrappedQuotes(trimmed.slice(2)));
       continue;
     }
+
     inTags = false;
-    if (line.startsWith('title:')) result.title = line.split(':').slice(1).join(':').trim().replace(/^"|"$/g, '');
-    if (line.startsWith('subtitle:')) result.subtitle = line.split(':').slice(1).join(':').trim().replace(/^"|"$/g, '');
-    if (line.startsWith('date:')) result.date = line.split(':').slice(1).join(':').trim();
-    if (line.startsWith('author:')) result.author = line.split(':').slice(1).join(':').trim();
-    if (line.startsWith('header-img:')) result.headerImage = line.split(':').slice(1).join(':').trim();
-    if (line.startsWith('catalog:')) result.catalog = line.split(':').slice(1).join(':').trim() === 'true';
+
+    if (trimmed.startsWith('title:')) result.title = trimWrappedQuotes(trimmed.slice('title:'.length));
+    if (trimmed.startsWith('subtitle:')) result.subtitle = trimWrappedQuotes(trimmed.slice('subtitle:'.length));
+    if (trimmed.startsWith('date:')) result.date = trimWrappedQuotes(trimmed.slice('date:'.length));
+    if (trimmed.startsWith('author:')) result.author = trimWrappedQuotes(trimmed.slice('author:'.length));
+    if (trimmed.startsWith('header-img:')) result.headerImage = trimWrappedQuotes(trimmed.slice('header-img:'.length));
   }
 
   return result;

@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import PostCard from '../components/PostCard.astro';
+import TopicCard from '../components/TopicCard.astro';
+import { getCollection } from 'astro:content';
+import { buildTopicOverview, getPrimaryTopic, sortPostsByDate } from '../lib/content';
+import { postPath, tagPath } from '../lib/routes';
+
+const posts = sortPostsByDate(await getCollection('posts')).filter((post) => !post.data.draft);
+const topicOverview = buildTopicOverview(posts).slice(0, 8);
+const latestPosts = posts.slice(0, 12);
+---
+<BaseLayout>
+  <Header />
+  <main>
+    <Hero totalPosts={posts.length} totalTopics={topicOverview.length} />
+
+    <section class="section kb-grid home-top">
+      <div>
+        <div class="section-title">
+          <div>
+            <span class="eyebrow">专题入口</span>
+            <h2>先从主题切入，再深入文章</h2>
+          </div>
+          <a class="tag" href="/tags/">查看全部标签</a>
+        </div>
+        <div class="topic-grid">
+          {topicOverview.map((item) => (
+            <TopicCard tag={item.tag} count={item.count} href={tagPath(item.tag)} summary={`围绕 ${item.tag} 已整理出 ${item.count} 篇内容，适合按专题连续阅读。`} />
+          ))}
+        </div>
+      </div>
+
+      <aside class="card" style="padding: 24px; display:grid; gap:16px; align-content:start;">
+        <span class="eyebrow">阅读导览</span>
+        <h3 style="margin:0; font-size: 28px;">把博客首页变成知识入口。</h3>
+        <p class="muted" style="margin:0;">你可以从标签进入某个主题，也可以直接从最新文章流开始阅读。现在的页面结构更偏知识库 / 专栏风，而不是普通卡片流博客。</p>
+        <div style="display:grid; gap:12px;">
+          <div class="meta-item"><span class="meta-label">当前文章总数</span><span>{posts.length}</span></div>
+          <div class="meta-item"><span class="meta-label">专题数量</span><span>{topicOverview.length}</span></div>
+          <div class="meta-item"><span class="meta-label">推荐起点</span><span>从标签页进入你关心的领域</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div>
+          <span class="eyebrow">最新更新</span>
+          <h2>最新文章流</h2>
+        </div>
+      </div>
+      <div class="post-list">
+        {latestPosts.map((post) => (
+          <PostCard
+            title={post.data.title}
+            description={post.data.description}
+            href={postPath(post.slug)}
+            meta={post.data.date.toISOString().slice(0, 10)}
+            cover={post.data.cover}
+            topic={getPrimaryTopic(post)}
+          />
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

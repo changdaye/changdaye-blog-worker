@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <rect width="1600" height="900" fill="#0A1020"/>
+  <path d="M240 450H560" stroke="#5AB4FF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M620 450H980" stroke="#6AA6FF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M1040 450H1360" stroke="#8FBCFF" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="600" cy="450" r="42" fill="#1F4FFF"/>
+  <circle cx="1020" cy="450" r="42" fill="#5AB4FF"/>
+  <text x="220" y="260" fill="#E8EEFC" font-size="92" font-family="Arial, sans-serif" font-weight="700">MQ Idempotency</text>
+  <text x="220" y="340" fill="#A9B4D0" font-size="34" font-family="Arial, sans-serif">重复消费、偏移提交与幂等处理</text>
+</svg>

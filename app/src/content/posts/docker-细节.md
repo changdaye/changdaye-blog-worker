@@ -1,0 +1,32 @@
+---
+title: "Docker 细节"
+subtitle: "\\\"Docker 使用的相关细节\\\""
+description: "时区"
+date: 2017-09-07
+author: "mrchang"
+tags:
+  - Docker
+  - dockerfile
+cover: "/images/site/post-bg-cook.jpg"
+featured: false
+draft: false
+---## 时区
+1. dockerfile中设置时区 `RUN echo "Asia/Shanghai" > /etc/timezone`
+2. docker run 时设置时区 `-e TZ="Asia/Shanghai" `
+
+## 权限
+1. 容器与宿主机目录权限互通： `chcon -Rt svirt_sandbox_file_t /my/custom` ; `-v  /my/custom `
+
+## 修改镜像存储文件夹
+1. 在 Ubuntu/Debian 系统下:
+	* 编辑 /etc/default/docker 文件, 
+	* 添加-g 参数的设置, 如下:
+ 		* DOCKER_OPTS="-dns 8.8.8.8 -dns 8.8.4.4 -g /mnt"
+2. 在 Fedora/Centos 系统下:
+	* 编辑 /etc/sysconfig/docker 文件,
+	*  添加-g 参数的设置, 如下:
+      * other_args="-g /mnt"
+
+## 日常晒猫
+
+![](/images/posts/cdn-blog.oss-cn-beijing.aliyuncs.com/17-9-9/75914381.jpg)
